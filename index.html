@@ -227,8 +227,13 @@
                 <p class="font-serif text-sm md:text-lg tracking-widest text-textlight mb-6 md:mb-10">02 Agustus 2026</p>
 
                 <div class="mb-6 md:mb-10 bg-bgcard/80 backdrop-blur-sm p-3 md:p-4 rounded-xl border border-gray-800 w-[90%] max-w-xs text-center">
-                    <p class="text-[10px] md:text-xs text-textmuted mb-1 font-serif">Kepada Yth.</p>
-                    <h2 class="font-serif text-lg md:text-xl font-semibold text-gold truncate">Tamu Undangan</h2>
+                  <p class="text-[10px] md:text-xs text-textmuted mb-1 font-serif">
+    Kepada Yth.
+</p>
+                    <h2 id="guest-name"
+    class="font-serif text-lg md:text-xl font-semibold text-gold truncate">
+    Tamu Undangan
+</h2>
                 </div>
 
                 <div class="btn-open-wrapper">
@@ -709,5 +714,15 @@
                  .replace(/'/g, "&#039;");
         }
     </script>
+    <script>
+const params = new URLSearchParams(window.location.search);
+
+const guestName = params.get("to");
+
+if (guestName) {
+    document.getElementById("guest-name").textContent =
+        decodeURIComponent(guestName);
+}
+</script>
 </body>
 </html>
