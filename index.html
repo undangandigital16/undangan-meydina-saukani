@@ -587,7 +587,7 @@
                     entry.target.classList.add('active');
                     const listItems = entry.target.querySelectorAll('.reveal-item');
                     listItems.forEach((item, index) => {
-                        item.style.transitionDelay = ${index * 50}ms; 
+                        item.style.transitionDelay = `${index * 50}ms`; 
                     });
                     observer.unobserve(entry.target);
                 }
