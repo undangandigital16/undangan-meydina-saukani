@@ -192,6 +192,7 @@
     <!-- Background Particles -->
     <canvas id="particles-js"></canvas>
 
+    <!-- GANTI NAMA LAGU DI BAWAH INI -->
     <audio id="bg-music" loop preload="auto">
         <source src="lagu.mp3" type="audio/mpeg">
     </audio>
@@ -211,8 +212,9 @@
             <div class="flex flex-col items-center mt-12 md:mt-10 px-4 w-full">
                 <p class="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-gold mb-4 md:mb-6 font-serif">The Wedding Of</p>
                 
+                <!-- FOTO COVER -->
                 <div class="relative w-40 h-56 md:w-56 md:h-72 mb-6 md:mb-8 rounded-t-full border border-gold/50 shadow-[0_0_30px_rgba(212,175,55,0.1)] overflow-hidden shrink-0">
-                    <img src="foto1.jpeg&auto=format&fit=crop&w=600&q=80" alt="Cover Photo" class="object-cover w-full h-full filter brightness-75 pointer-events-none">
+                    <img src="foto.jpeg" alt="Cover Photo" class="object-cover w-full h-full filter brightness-75 pointer-events-none">
                     <div class="absolute inset-0 bg-gradient-to-t from-bgdark via-transparent to-transparent pointer-events-none"></div>
                 </div>
 
@@ -253,18 +255,14 @@
         <!-- Galeri / Baris Khusus Foto -->
         <section class="px-4 md:px-6 py-8 md:py-12 text-center reveal w-full overflow-hidden">
             <div class="flex flex-row justify-center gap-4 md:gap-8 items-center max-w-2xl mx-auto">
-                <!-- ==========================================
-                     FOTO 2 (Kiri) 
-                =========================================== -->
+                <!-- FOTO 2 -->
                 <div class="w-1/2 h-56 md:h-80 rounded-xl overflow-hidden border border-gold/30 shadow-[0_0_20px_rgba(212,175,55,0.1)] group relative">
-                    <img src="foto2.jpeg&auto=format&fit=crop&w=600&q=80" alt="Foto Meydina" class="object-cover w-full h-full filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                    <img src="foto2.jpeg" alt="Foto Meydina" class="object-cover w-full h-full filter brightness-90 group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-bgdark via-transparent to-transparent opacity-60"></div>
                 </div>
-                <!-- ==========================================
-                     FOTO 3 (Kanan) 
-                =========================================== -->
+                <!-- FOTO 3 -->
                 <div class="w-1/2 h-56 md:h-80 rounded-xl overflow-hidden border border-gold/30 shadow-[0_0_20px_rgba(212,175,55,0.1)] group relative">
-                    <img src="foto3.jpeg&auto=format&fit=crop&w=600&q=80" alt="Foto Saukani" class="object-cover w-full h-full filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                    <img src="foto3.jpeg" alt="Foto Saukani" class="object-cover w-full h-full filter brightness-90 group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-bgdark via-transparent to-transparent opacity-60"></div>
                 </div>
             </div>
@@ -589,7 +587,7 @@
                     entry.target.classList.add('active');
                     const listItems = entry.target.querySelectorAll('.reveal-item');
                     listItems.forEach((item, index) => {
-                        item.style.transitionDelay = `${index * 50}ms`; 
+                        item.style.transitionDelay = ${index * 50}ms; 
                     });
                     observer.unobserve(entry.target);
                 }
