@@ -55,7 +55,6 @@
     </script>
 
     <style>
-        /* Base Styling */
         body, html {
             margin: 0;
             padding: 0;
@@ -66,20 +65,15 @@
             overflow-x: hidden;
             width: 100%;
         }
-
-        /* Prevent scroll before opening on body */
         body.locked {
             overflow: hidden;
             height: 100vh;
         }
-
-        /* Envelope / Cover Animations */
         #cover-screen {
             transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1);
             transform-origin: top;
             perspective: 1000px;
         }
-        
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -93,23 +87,19 @@
             transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1);
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             border-top: 2px solid #D4AF37;
-            pointer-events: none; /* Fix for clicking button under flap on small screens */
+            pointer-events: none; 
         }
-
         .opened .envelope-flap {
             transform: rotateX(180deg);
             opacity: 0;
         }
-
         .opened {
             transform: translateY(-100vh);
-            pointer-events: none; /* Completely disable cover interaction once opened */
+            pointer-events: none; 
         }
-
-        /* Fix for Safari/iOS z-index and click issues */
         #cover-content {
             position: relative;
-            z-index: 20; /* Ensure button is above everything */
+            z-index: 20; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -118,34 +108,27 @@
             width: 100%;
             padding-bottom: 2rem;
         }
-
-        /* Button Open Specific Fix */
         .btn-open-wrapper {
             position: relative;
-            z-index: 999; /* Force button to top layer */
+            z-index: 999; 
             margin-top: 1rem;
         }
-
         .btn-open {
             cursor: pointer;
             position: relative;
         }
-
-        /* Main Content Intro Animation */
         #main-content {
             opacity: 0;
             transform: translateY(50px);
             transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
             transition-delay: 0.5s;
-            display: none; /* Hide entirely until opened to prevent scrolling glitches */
+            display: none; 
         }
         #main-content.visible {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(40px) scale(0.95);
@@ -155,7 +138,6 @@
             opacity: 1;
             transform: translateY(0) scale(1);
         }
-        
         .reveal-item {
             opacity: 0;
             transform: translateX(-20px);
@@ -165,8 +147,6 @@
             opacity: 1;
             transform: translateX(0);
         }
-        
-        /* Premium Divider */
         .premium-divider {
             display: flex;
             align-items: center;
@@ -185,41 +165,12 @@
             margin: 0 15px;
             font-size: 0.8rem;
         }
-
-        /* Photo Frames - Premium Black Gold */
-        .premium-frame {
-            position: relative;
-            padding: 5px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #D4AF37, #AA8C2C, #F3E5AB, #D4AF37);
-            background-size: 200% 200%;
-            animation: gradientMove 5s ease infinite;
-        }
-        
-        .premium-frame-inner {
-            border-radius: 50%;
-            border: 4px solid #1a1a1a;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            background-color: #111;
-        }
-        
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Custom Scrollbar for Messages */
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #111; border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
-
         input:focus, textarea:focus {
             box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
         }
-        
         #particles-js {
             position: fixed;
             width: 100%;
@@ -229,8 +180,6 @@
             z-index: -1;
             pointer-events: none;
         }
-
-        /* Responsive Fixes */
         @media (max-width: 640px) {
             .font-script { font-size: 3.5rem !important; }
             #cover-content h1 { font-size: 4rem !important; line-height: 1.1; margin-bottom: 1rem;}
@@ -240,10 +189,10 @@
 </head>
 <body class="font-sans text-textlight antialiased locked">
 
-    <!-- Background Particles Canvas -->
+    <!-- Background Particles -->
     <canvas id="particles-js"></canvas>
 
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_731422a59a.mp3?filename=wedding-piano-102553.mp3" type="audio/mpeg">
     </audio>
 
@@ -252,15 +201,12 @@
         <i class="fas fa-compact-disc text-xl md:text-2xl" id="music-icon"></i>
     </button>
 
-    <!-- SAMPUL DEPAN (ENVELOPE/COVER) -->
+    <!-- SAMPUL DEPAN -->
     <div id="cover-screen" class="fixed inset-0 z-50 bg-bgdark border-4 md:border-8 border-bgcard">
-        
-        <!-- Flap Animasi Amplop -->
         <div class="envelope-flap flex items-end justify-center pb-6 md:pb-10">
             <div class="text-gold opacity-50 text-[10px] md:text-xs tracking-widest font-serif">UNDANGAN PERNIKAHAN</div>
         </div>
         
-        <!-- Fix: Bungkus konten dalam div relatif agar z-index bekerja sempurna -->
         <div id="cover-content">
             <div class="flex flex-col items-center mt-12 md:mt-10 px-4 w-full">
                 <p class="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-gold mb-4 md:mb-6 font-serif">The Wedding Of</p>
@@ -283,7 +229,6 @@
                     <h2 class="font-serif text-lg md:text-xl font-semibold text-gold truncate">Tamu Undangan</h2>
                 </div>
 
-                <!-- Fix: Z-index diperjelas dan event onclick dijamin fire -->
                 <div class="btn-open-wrapper">
                     <button id="btnOpenAction" class="btn-open animate-pulse-gold bg-gold hover:bg-goldlight text-bgdark font-serif font-bold tracking-widest py-3 px-6 md:px-8 rounded-full transition duration-300 flex items-center gap-2 md:gap-3 text-xs md:text-sm shadow-lg">
                         <i class="fas fa-envelope-open"></i> BUKA UNDANGAN
@@ -296,7 +241,8 @@
     <!-- KONTEN UTAMA UNDANGAN -->
     <div id="main-content" class="w-full max-w-md md:max-w-3xl mx-auto bg-bgdark shadow-[0_0_50px_rgba(0,0,0,0.5)] relative pb-20 min-h-screen">
         
-        <section class="text-center pt-20 md:pt-24 pb-12 px-4 md:px-6 reveal">
+        <!-- Bismillah -->
+        <section class="text-center pt-20 md:pt-24 pb-4 px-4 md:px-6 reveal">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Basmala.svg" alt="Bismillah" class="w-40 md:w-48 mx-auto mb-6 md:mb-8 opacity-70 filter invert">
             <p class="text-xs md:text-base leading-relaxed text-textmuted font-serif">
                 Assalamu'alaikum Warahmatullahi Wabarakatuh.<br><br>
@@ -304,49 +250,81 @@
             </p>
         </section>
 
-        <section class="text-center px-4 md:px-6 py-8 md:py-12 reveal w-full overflow-hidden">
-            <!-- MEMPELAI WANITA -->
-            <div class="flex flex-col items-center mb-12 md:mb-16 relative">
-                <div class="w-40 h-40 md:w-48 md:h-48 premium-frame mb-6 md:mb-8 shrink-0">
-                    <div class="premium-frame-inner">
-                        <img src="https://images.unsplash.com/photo-1541250848049-b4f71426ca91?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Meydina" class="object-cover w-full h-full filter brightness-90">
-                    </div>
+        <!-- Galeri / Baris Khusus Foto -->
+        <section class="px-4 md:px-6 py-8 md:py-12 text-center reveal w-full overflow-hidden">
+            <div class="flex flex-row justify-center gap-4 md:gap-8 items-center max-w-2xl mx-auto">
+                <!-- ==========================================
+                     FOTO 2 (Kiri) 
+                =========================================== -->
+                <div class="w-1/2 h-56 md:h-80 rounded-xl overflow-hidden border border-gold/30 shadow-[0_0_20px_rgba(212,175,55,0.1)] group relative">
+                    <img src="https://images.unsplash.com/photo-1541250848049-b4f71426ca91?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Foto Meydina" class="object-cover w-full h-full filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bgdark via-transparent to-transparent opacity-60"></div>
                 </div>
+                <!-- ==========================================
+                     FOTO 3 (Kanan) 
+                =========================================== -->
+                <div class="w-1/2 h-56 md:h-80 rounded-xl overflow-hidden border border-gold/30 shadow-[0_0_20px_rgba(212,175,55,0.1)] group relative">
+                    <img src="https://images.unsplash.com/photo-1555008872-f03b347fd886?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Foto Saukani" class="object-cover w-full h-full filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-bgdark via-transparent to-transparent opacity-60"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mempelai Teks Saja -->
+        <section class="text-center px-4 md:px-6 py-4 reveal w-full overflow-hidden">
+            <div class="flex flex-col items-center mb-8 md:mb-12">
                 <h2 class="font-script text-5xl md:text-6xl text-gold mb-2 break-words w-full px-2">Meydina Pramita</h2>
-                <p class="font-serif text-lg md:text-xl font-semibold mb-4 tracking-widest text-textlight">( Meydina )</p>
-                <p class="text-xs md:text-sm text-textmuted leading-relaxed px-2">
+                <p class="font-serif text-lg md:text-xl font-semibold mb-3 tracking-widest text-textlight">( Meydina )</p>
+                <p class="text-[11px] md:text-sm text-textmuted leading-relaxed px-2">
                     Putri Pertama dari <br> 
                     <span class="text-gold font-medium">Bapak Arbainsyah</span> & <span class="text-gold font-medium">Ibu Nawati</span>
                 </p>
             </div>
 
-            <div class="flex items-center justify-center my-8 md:my-10">
+            <div class="flex items-center justify-center my-6 md:my-8">
                 <div class="h-px bg-gradient-to-r from-transparent via-gold to-transparent w-1/4"></div>
                 <div class="font-script text-6xl md:text-7xl text-gold mx-4 md:mx-6 animate-float">&</div>
                 <div class="h-px bg-gradient-to-r from-transparent via-gold to-transparent w-1/4"></div>
             </div>
 
-            <!-- MEMPELAI PRIA -->
-            <div class="flex flex-col items-center relative">
-                <div class="w-40 h-40 md:w-48 md:h-48 premium-frame mb-6 md:mb-8 shrink-0">
-                    <div class="premium-frame-inner">
-                        <img src="https://images.unsplash.com/photo-1555008872-f03b347fd886?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Saukani" class="object-cover w-full h-full filter brightness-90">
-                    </div>
-                </div>
+            <div class="flex flex-col items-center mt-8 md:mt-12">
                 <h2 class="font-script text-5xl md:text-6xl text-gold mb-2 break-words w-full px-2">Muhamad Saukani</h2>
-                <p class="font-serif text-lg md:text-xl font-semibold mb-4 tracking-widest text-textlight">( Saukani )</p>
-                <p class="text-xs md:text-sm text-textmuted leading-relaxed px-2">
+                <p class="font-serif text-lg md:text-xl font-semibold mb-3 tracking-widest text-textlight">( Saukani )</p>
+                <p class="text-[11px] md:text-sm text-textmuted leading-relaxed px-2">
                     Putra Kedua dari <br> 
                     <span class="text-gold font-medium">Bapak Akhmad Hartoni (Alm)</span> & <span class="text-gold font-medium">Ibu Megawati</span>
                 </p>
             </div>
         </section>
 
-        <!-- Jadwal Acara -->
-        <section class="px-4 md:px-6 py-12 md:py-16 bg-bgcard/50 text-center reveal border-y border-gray-800">
+        <!-- Jadwal Acara & Countdown -->
+        <section class="px-4 md:px-6 py-12 md:py-16 bg-bgcard/50 text-center reveal border-y border-gray-800 mt-8">
             <h2 class="font-serif text-2xl md:text-3xl font-bold text-gold tracking-widest mb-2 uppercase">Waktu & Tempat</h2>
             <div class="premium-divider"><i class="fas fa-calendar-alt text-gold/50 text-sm"></i></div>
             
+            <!-- Countdown -->
+            <div class="my-10 md:my-14">
+                <h3 class="font-serif text-xs md:text-sm text-textlight tracking-[0.2em] mb-6 uppercase">Menuju Hari Bahagia</h3>
+                <div id="countdown" class="flex justify-center gap-3 md:gap-6">
+                    <div class="bg-bgdark border border-gold/30 w-16 h-16 md:w-24 md:h-24 rounded-lg flex flex-col justify-center items-center shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <span id="cd-days" class="font-serif text-2xl md:text-4xl text-gold font-bold">00</span>
+                        <span class="text-[9px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Hari</span>
+                    </div>
+                    <div class="bg-bgdark border border-gold/30 w-16 h-16 md:w-24 md:h-24 rounded-lg flex flex-col justify-center items-center shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <span id="cd-hours" class="font-serif text-2xl md:text-4xl text-gold font-bold">00</span>
+                        <span class="text-[9px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Jam</span>
+                    </div>
+                    <div class="bg-bgdark border border-gold/30 w-16 h-16 md:w-24 md:h-24 rounded-lg flex flex-col justify-center items-center shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <span id="cd-minutes" class="font-serif text-2xl md:text-4xl text-gold font-bold">00</span>
+                        <span class="text-[9px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Menit</span>
+                    </div>
+                    <div class="bg-bgdark border border-gold/30 w-16 h-16 md:w-24 md:h-24 rounded-lg flex flex-col justify-center items-center shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <span id="cd-seconds" class="font-serif text-2xl md:text-4xl text-gold font-bold">00</span>
+                        <span class="text-[9px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Detik</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-8 md:mt-12">
                 <div class="bg-bgdark p-6 md:p-8 rounded-xl border border-gray-800 hover:border-gold/50 transition-colors shadow-lg group relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-50"></div>
@@ -420,7 +398,7 @@
             </div>
         </section>
 
-        <!-- Guestbook / Buku Tamu (Firebase) -->
+        <!-- Guestbook / Buku Tamu -->
         <section class="px-4 md:px-6 py-12 md:py-16 reveal relative">
             <div class="absolute inset-0 bg-gold opacity-5 blur-[100px] rounded-full"></div>
             
@@ -486,7 +464,6 @@
             window.addEventListener('resize', resize);
 
             const particles = [];
-            // Kurangi jumlah partikel di layar kecil agar tidak lag
             const particleCount = window.innerWidth < 768 ? 25 : 50; 
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
@@ -520,61 +497,84 @@
         }
         initParticles();
 
-        // FIX: Fungsi buka undangan menggunakan event listener vanilla JS yang lebih robust
+        // COUNTDOWN TIMER LOGIC (2 Agustus 2026 08:00 WIB)
+        const countDownDate = new Date("Aug 2, 2026 08:00:00").getTime();
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("cd-days").innerHTML = "00";
+                document.getElementById("cd-hours").innerHTML = "00";
+                document.getElementById("cd-minutes").innerHTML = "00";
+                document.getElementById("cd-seconds").innerHTML = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("cd-days").innerHTML = days < 10 ? '0'+days : days;
+            document.getElementById("cd-hours").innerHTML = hours < 10 ? '0'+hours : hours;
+            document.getElementById("cd-minutes").innerHTML = minutes < 10 ? '0'+minutes : minutes;
+            document.getElementById("cd-seconds").innerHTML = seconds < 10 ? '0'+seconds : seconds;
+        }, 1000);
+
+        // MUSIC & OPENING LOGIC
         document.addEventListener('DOMContentLoaded', () => {
             const btnOpen = document.getElementById('btnOpenAction');
+            const audio = document.getElementById('bg-music');
+            const musicIcon = document.getElementById('music-icon');
+            const musicBtn = document.getElementById('music-btn');
             
             if(btnOpen) {
                 btnOpen.addEventListener('click', function(e) {
-                    e.preventDefault(); // Mencegah default action
+                    e.preventDefault(); 
                     
+                    // PLAY AUDIO SECARA SINKRON SAAT KLIK (Mengatasi Auto-play Block browser)
+                    if (audio.paused) {
+                        audio.play().then(() => {
+                            musicIcon.classList.add('animate-spin-slow');
+                        }).catch(error => {
+                            console.log("Autoplay diblokir browser, abaikan dan biarkan pengunjung klik manual nanti.", error);
+                        });
+                    }
+
+                    // Hapus scroll lock
                     document.body.classList.remove('locked');
-                    document.body.style.overflow = 'auto'; // Force overflow
+                    document.body.style.overflow = 'auto'; 
 
                     const mainContent = document.getElementById('main-content');
-                    mainContent.style.display = 'block'; // Ensure it's in DOM
+                    mainContent.style.display = 'block'; 
                     
                     const cover = document.getElementById('cover-screen');
                     cover.classList.add('opened');
                     
                     setTimeout(() => {
                         mainContent.classList.add('visible');
-                        const musicBtn = document.getElementById('music-btn');
                         musicBtn.classList.remove('hidden');
                         setTimeout(() => musicBtn.style.opacity = '1', 50);
                     }, 500);
+                });
+            }
 
-                    // Putar Musik Otomatis jika memungkinkan
-                    toggleMusic(true);
+            // Manual toggle button for music
+            if(musicBtn) {
+                musicBtn.addEventListener('click', () => {
+                    if (audio.paused) {
+                        audio.play().then(() => {
+                            musicIcon.classList.add('animate-spin-slow');
+                        }).catch(err => console.log(err));
+                    } else {
+                        audio.pause();
+                        musicIcon.classList.remove('animate-spin-slow');
+                    }
                 });
             }
         });
-
-        // Kontrol Musik
-        const audio = document.getElementById('bg-music');
-        const musicIcon = document.getElementById('music-icon');
-        const musicBtn = document.getElementById('music-btn');
-        
-        if(musicBtn) {
-            musicBtn.addEventListener('click', () => toggleMusic(false));
-        }
-
-        function toggleMusic(isOpening = false) {
-            if (audio.paused) {
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        musicIcon.classList.add('animate-spin-slow');
-                    }).catch(error => {
-                        // Auto-play was prevented.
-                        console.log("Autoplay diblokir browser. Pengunjung perlu klik tombol.");
-                    });
-                }
-            } else if (!isOpening) {
-                audio.pause();
-                musicIcon.classList.remove('animate-spin-slow');
-            }
-        }
 
         // Animasi Scroll (Intersection Observer)
         const observerOptions = {
@@ -589,20 +589,18 @@
                     entry.target.classList.add('active');
                     const listItems = entry.target.querySelectorAll('.reveal-item');
                     listItems.forEach((item, index) => {
-                        item.style.transitionDelay = `${index * 50}ms`; // Sedikit lebih cepat di mobile
+                        item.style.transitionDelay = `${index * 50}ms`; 
                     });
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Hanya observe elemen jika browser support
         if ('IntersectionObserver' in window) {
             document.querySelectorAll('.reveal').forEach((element) => {
                 observer.observe(element);
             });
         } else {
-            // Fallback untuk browser tua
             document.querySelectorAll('.reveal').forEach((element) => {
                 element.classList.add('active');
             });
